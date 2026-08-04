@@ -4,6 +4,8 @@ RAW = pathlib.Path("data/raw")
 DB = pathlib.Path("data/pace.db")
 FILES = ["stops", "stop_times", "trips", "routes", "calendar", "calendar_dates"]
 
+DB.parent.mkdir(parents=True, exist_ok=True)
+RAW.mkdir(parents=True, exist_ok=True)
 con = sqlite3.connect(DB)
 for name in FILES:
     path = RAW / (name + ".txt")
