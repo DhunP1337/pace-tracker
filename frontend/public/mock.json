@@ -1,0 +1,9 @@
+{
+  "stop": "Oakton Community College",
+  "stopId": "220s0345",
+  "departures": [
+    { "time": "22:10:00", "route": "208", "headsign": "Golf Mill", "serviceId": "2026-06-NW-Weekday-01" },
+    { "time": "22:40:00", "route": "208", "headsign": "Golf Mill", "serviceId": "2026-06-NW-Weekday-01" },
+    { "time": "24:16:00", "route": "208", "headsign": "Golf Mill", "serviceId": "2026-06-NW-Weekday-01" }
+  ]
+}
