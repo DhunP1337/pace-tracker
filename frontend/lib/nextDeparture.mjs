@@ -43,7 +43,8 @@ export const DAYS = [
  * @returns {number} seconds since midnight of the service day
  */
 export function toSeconds(hms) {
-  throw new Error("not implemented");
+  const [hours, minutes, seconds] = hms.split(":").map(Number);
+  return hours * 3600 + minutes * 60 + seconds;
 }
 
 /**
