@@ -59,7 +59,35 @@ export function toSeconds(hms) {
  * @returns {Set<string>} active service IDs
  */
 export function activeServiceIds(feed, ymd) {
-  throw new Error("not implemented");
+  const weekday = mondayIndexedWeekday(ymd);
+  const ids = new Set();
+
+  for (const [serviceId, service] of Object.entries(feed.calendar)) {
+    if (
+      service.startDate <= ymd &&
+      ymd <= service.endDate &&
+      service.days[weekday] === 1
+    ) {
+      ids.add(serviceId);
+    }
+  }
+
+  const exception = feed.exceptions?.[ymd];
+  if (exception) {
+    for (const id of exception.removed ?? []) ids.delete(id);
+    for (const id of exception.added ?? []) ids.add(id);
+  }
+
+  return ids;
+}
+
+/** "YYYYMMDD" -> weekday index where 0 = Monday ... 6 = Sunday. */
+function mondayIndexedWeekday(ymd) {
+  const year = Number(ymd.slice(0, 4));
+  const month = Number(ymd.slice(4, 6));
+  const day = Number(ymd.slice(6, 8));
+  const sundayIndexed = new Date(year, month - 1, day).getDay();
+  return (sundayIndexed + 6) % 7;
 }
 
 /**
